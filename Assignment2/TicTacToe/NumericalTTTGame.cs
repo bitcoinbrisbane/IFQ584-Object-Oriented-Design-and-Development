@@ -43,6 +43,16 @@ public sealed class NumericalTTTGame : Game, IGame
         return board.IsFull() ? MoveOutcome.Draw : MoveOutcome.Continue;
     }
 
+    public void Help()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Render()
+    {
+        throw new NotImplementedException();
+    }
+
     /// <summary>True if every cell in the line is filled and they add up to the target sum.</summary>
     private static bool IsMatch(Board board, (int Row, int Column)[] line)
     {

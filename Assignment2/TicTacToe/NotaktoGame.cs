@@ -33,6 +33,16 @@ public sealed class NotaktoGame : Game, IGame
         throw new NotImplementedException();
     }
 
+    public void Help()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Render()
+    {
+        throw new NotImplementedException();
+    }
+
     private static bool IsMatch(Board board, (int Row, int Column)[] line)
     {
         throw new NotImplementedException();

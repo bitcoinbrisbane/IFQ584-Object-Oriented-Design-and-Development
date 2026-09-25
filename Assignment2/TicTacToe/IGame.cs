@@ -14,6 +14,16 @@ public interface IGame
     MoveOutcome PlayMove(Placement p);
 
     /// <summary>
+    /// Shows how this game is played.
+    /// </summary>
+    void Help();
+
+    /// <summary>
+    /// Draws the game's current board or boards.
+    /// </summary>
+    void Render();
+
+    /// <summary>
     /// Persists the current game so it can be reloaded later.
     /// </summary>
     void Save();

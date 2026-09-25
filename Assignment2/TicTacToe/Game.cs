@@ -159,29 +159,6 @@ public abstract class Game
         }
     }
 
-    // Commands (undo / redo) //
-
-    /// <summary>
-    /// Plays the current player's move in the given cell by building and
-    /// executing a <see cref="MoveCommand"/>, then recording it on the undo
-    /// history. Returns <see cref="MoveOutcome.Illegal"/> (without changing
-    /// anything) if the move was not allowed. A fresh move retires any commands
-    /// that were waiting to be redone.
-    /// </summary>
-    // public MoveOutcome PlayMove(int row, int column, int boardIndex = 0)
-    // {
-    //     var command = new MoveCommand(this, row, column, boardIndex);
-
-    //     if (!command.Execute())
-    //     {
-    //         return MoveOutcome.Illegal;
-    //     }
-
-    //     _undo.Push(command);
-    //     _redo.Clear();
-    //     return command.Outcome;
-    // }
-
     /// <summary>True if there is a command that can be undone.</summary>
     public bool CanUndo => _undo.Count > 0;
 
