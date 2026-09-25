@@ -3,6 +3,7 @@ namespace TicTacToe;
 /// <summary>
 /// Gomoku: players take turns placing their own stones on a large board; the
 /// first to get <see cref="InRow"/> of their stones in a line wins.
+/// https://en.wikipedia.org/wiki/Gomoku
 /// </summary>
 public sealed class GomokuGame : Game, IGame
 {

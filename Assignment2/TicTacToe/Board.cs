@@ -6,7 +6,7 @@ namespace TicTacToe;
 /// 1..n^2, and it owns the winning algorithm for the game (see
 /// <see cref="TargetSum"/> and <see cref="HasWinningLine()"/>).
 /// </summary>
-public class Board
+public class Board : IBoard
 {
     /// <summary>
     /// The grid of cells. Each cell holds a <see cref="Piece"/>,
@@ -31,7 +31,7 @@ public class Board
     /// The size of the board (the number of cells along one side).
     /// Set once via the constructor and cannot be changed afterwards.
     /// </summary>
-    public readonly int Size;
+    public int Size { get; }
 
     /// <summary>
     /// The height of the board in cells. For a square board this equals Size.
