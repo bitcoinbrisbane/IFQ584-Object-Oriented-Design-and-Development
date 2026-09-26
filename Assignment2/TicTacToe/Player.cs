@@ -3,7 +3,7 @@ namespace TicTacToe;
 /// <summary>
 /// A human player that chooses its moves by typing them at the console.
 /// </summary>
-public class Player : PlayerBase, IPlayer
+public class Player : PlayerBase, IPlayer, INumberPicker
 {
     /// <summary>
     /// Creates a new human player with the given name.
@@ -15,21 +15,17 @@ public class Player : PlayerBase, IPlayer
 
     /// <summary>
     /// Prompts this human player for a move at the console.
-    /// Expects a "row column" pair, both 0-based, with a board number in front
-    /// ("board row column") when the game has more than one board. The player
-    /// only chooses where; the game decides what is placed. Keeps asking until
-    /// the input parses. Legality is checked by the game, not here.
+    /// Expects a "row column" pair, both 0-based; the number to place is the
+    /// game's next number, so the player only chooses the cell. Keeps asking
+    /// until the input parses. Legality against the board is checked by the game
+    /// loop, not here.
     /// </summary>
-    public override Placement GetMove(IReadOnlyList<IBoard> boards)
+    public override Move GetMove(Board board)
     {
-        bool chooseBoard = boards.Count > 1;
-        string format = chooseBoard ? "board row column" : "row column";
-        string example = chooseBoard ? "0 1 2" : "1 2";
-
         while (true)
         {
-            Console.WriteLine($"{Name}'s turn.");
-            Console.Write($"Enter your move as \"{format}\": ");
+            //Console.WriteLine($"{Name}'s turn. You play the number ///{board.NextNumber}///."); // blanked out as this is just runing through numbers in order
+            Console.Write("Enter your move as \"row column\": ");
             string? line = Console.ReadLine();
 
             // Console.ReadLine returns null at end of input (e.g. Ctrl-D, or a
@@ -45,18 +41,37 @@ public class Player : PlayerBase, IPlayer
             var parts = line.Split(
                 new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            int[] numbers = parts.Select(part => int.TryParse(part, out int n) ? n : -1).ToArray();
-            int expected = chooseBoard ? 3 : 2;
-
-            if (numbers.Length == expected && numbers.All(n => n >= 0))
+            if (parts is { Length: 2 } &&
+                int.TryParse(parts[0], out int row) &&
+                int.TryParse(parts[1], out int column))
             {
-                // The player chooses only where; the game supplies the piece.
-                return chooseBoard
-                    ? new Placement(numbers[1], numbers[2], 0, numbers[0])
-                    : new Placement(numbers[0], numbers[1], 0);
+                // The player chooses only the cell; the board's next number is
+                // what gets placed.
+                return new Move(row, column, 22);
             }
 
-            Console.WriteLine($"Please enter {expected} numbers, e.g. \"{example}\".");
+            Console.WriteLine("Please enter two numbers, e.g. \"1 2\".");
+        }
+    }
+
+    public int PickANumber(IReadOnlyList<int> available)
+    {
+        while (true)
+        {
+            Console.Write($"Choose a number ({string.Join(", ", available)}): ");
+            string? line = Console.ReadLine();
+
+            if (line == null)
+            {
+                Console.WriteLine();
+                Console.WriteLine("No more input. Goodbye.");
+                Environment.Exit(0);
+            }
+
+            if (int.TryParse(line, out int n) && available.Contains(n))
+                return n;
+
+            Console.WriteLine("That number isn't available, try again.");
         }
     }
 }
