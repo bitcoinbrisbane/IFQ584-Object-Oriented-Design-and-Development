@@ -30,7 +30,7 @@ public static class GameFactory
         {
             GameType.NumericalTicTacToe => new NumericalTTTGame(playerOne, playerTwo, boardSize),
             GameType.Notakto => new NotaktoGame(playerOne, playerTwo),
-            GameType.Gomoku => new GomokuGame(playerOne, playerTwo),
+            GameType.Gomoku => new GomokuGame(playerOne, playerTwo, boardSize),
             _ => throw new ArgumentOutOfRangeException(
                 nameof(gameType), gameType, "Unknown game type selection, please try again.")
         };

@@ -24,7 +24,7 @@ public sealed class NumericalTTTGame : Game, IGame
     }
 
 
-    public int AskForNumber(IPlayer player, Board board)
+    public int AskForNumber(IPlayer player, IBoard board)
     {
         int turnValue; 
 
@@ -45,37 +45,41 @@ public sealed class NumericalTTTGame : Game, IGame
 
     public override GameType Type => GameType.NumericalTicTacToe;
     
-    public bool IsLegal(Placement placement)
+    protected override bool IsLegal(Placement placement)
     {
-        Board board = Boards[placement.BoardIndex];
+        IBoard board = Boards[placement.BoardIndex];
         return board.GetCell(placement.Row, placement.Column) is null; // true ( legal)  only if the cell is empty
 
     }
 
-    public MoveOutcome PlayMove(Placement placement)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Render()
+    protected override MoveOutcome PlayMove(Placement placement)
     {
         throw new NotImplementedException();
     }
 
     public void Help()
     {
-        throw new NotImplementedException();
+        // TargetSum and HighestNumber are Numerical-only, so they live on the concrete Board. //
+        Board board = (Board)Boards[0];
+
+        Console.WriteLine($"Board size: {board.Size}x{board.Size}, using the numbers 1 to {board.HighestNumber}");
+        Console.WriteLine(
+            $"Complete a row, column or diagonal of {board.Size} numbers adding up to " +
+            $"{board.TargetSum} to win.");
+        Console.WriteLine($"Rows and columns are numbered from 0 to {board.Size - 1}.");
+        Console.WriteLine();
     }
 
     public void Apply(Placement placement)
     {
-        Board board = Boards[placement.BoardIndex];
+        IBoard board = Boards[placement.BoardIndex];
         board.PlacePiece(placement.Row, placement.Column, new Piece(_selectedNumber));
     }
 
     public MoveOutcome Evaluate(Placement placement)
     {
-        Board board = Boards[placement.BoardIndex];
+        // TargetSum is Numerical-only, so it lives on the concrete Board. //
+        Board board = (Board)Boards[placement.BoardIndex];
 
         if (Lines(board, board.Size).Any(line => IsMatch(board, line)))
         {

@@ -2,18 +2,13 @@ namespace TicTacToe;
 
 public interface IGame
 {
-    /// <summary>Any extra rule a game places on moves.</summary>
-    bool IsLegal(Placement placement);
-
-    /// <summary>Puts the move's piece on the board.</summary>
-    // void Apply(Placement placement);
-
     /// <summary>
-    /// Decides what the move just applied means for the player who made it.
+    /// Asks the current player for a move and plays it, re-asking until the move
+    /// is legal. Returns what the move meant for the player who made it.
     /// </summary>
-    MoveOutcome PlayMove(Placement placement);
+    MoveOutcome TakeTurn();
 
-    /// <summary>Draws the current board to the console.</summary>
+    /// <summary>Draws the current board(s) to the console.</summary>
     void Render();
 
     /// <summary>Prints how to play this game type.</summary>
@@ -43,9 +38,6 @@ public interface IGame
     public IPlayer PlayerTwo { get; }
 
     public GameType Type { get; }
-
-    // remove this, should be private
-    public IReadOnlyList<Board> Boards { get; }
 
     public IPlayer CurrentPlayer { get; }
 }

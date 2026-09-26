@@ -23,24 +23,23 @@ public sealed class NotaktoGame : Game, IGame
         throw new NotImplementedException();
     }
 
-    public bool IsLegal(Placement placement)
+    protected override bool IsLegal(Placement placement)
     {
         throw new NotImplementedException();
     }
 
-    public MoveOutcome PlayMove(Placement placement)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Render()
+    protected override MoveOutcome PlayMove(Placement placement)
     {
         throw new NotImplementedException();
     }
 
     public void Help()
     {
-        throw new NotImplementedException();
+        Console.WriteLine("Both players play X on three 3x3 boards (numbered 0 to 2).");
+        Console.WriteLine("A board with three in a row is dead and can't be played on.");
+        Console.WriteLine("Whoever kills the last board loses.");
+        Console.WriteLine("Enter moves as \"board row column\", e.g. \"0 1 2\".");
+        Console.WriteLine();
     }
 
     private static bool IsMatch(Board board, (int Row, int Column)[] line)
