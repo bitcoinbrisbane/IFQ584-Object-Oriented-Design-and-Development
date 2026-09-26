@@ -18,17 +18,27 @@ public sealed class NotaktoGame : Game, IGame
         throw new NotImplementedException();
     }
 
-    private bool IsDead(Board b)
+    private bool IsDead(Board board)
     {
         throw new NotImplementedException();
     }
 
-    public bool IsLegal(Placement p)
+    public bool IsLegal(Placement placement)
     {
         throw new NotImplementedException();
     }
 
-    public MoveOutcome PlayMove(Placement p)
+    public MoveOutcome PlayMove(Placement placement)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Render()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Help()
     {
         throw new NotImplementedException();
     }

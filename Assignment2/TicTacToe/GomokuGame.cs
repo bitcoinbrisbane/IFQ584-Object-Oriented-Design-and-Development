@@ -17,12 +17,22 @@ public sealed class GomokuGame : Game, IGame
 
     private int CurrentPiece => MoveCount % 2 == 0 ? 1 : 2;
 
-    public bool IsLegal(Placement p)
+    public bool IsLegal(Placement placement)
     {
         throw new NotImplementedException();
     }
 
-    public MoveOutcome PlayMove(Placement p)
+    public MoveOutcome PlayMove(Placement placement)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Render()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Help()
     {
         throw new NotImplementedException();
     }

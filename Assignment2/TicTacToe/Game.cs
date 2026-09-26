@@ -119,15 +119,15 @@ public abstract class Game
     }
 
     /// <summary>True if the placement names a real board and an empty cell on it.</summary>
-    private bool IsOnAnEmptyCell(Placement p)
+    private bool IsOnAnEmptyCell(Placement placement)
     {
-        if (p.BoardIndex < 0 || p.BoardIndex >= _boards.Length)
+        if (placement.BoardIndex < 0 || placement.BoardIndex >= _boards.Length)
         {
             return false;
         }
 
-        Board board = _boards[p.BoardIndex];
-        return board.IsInBounds(p.Row, p.Column) && board.GetCell(p.Row, p.Column) is null;
+        Board board = _boards[placement.BoardIndex];
+        return board.IsInBounds(placement.Row, placement.Column) && board.GetCell(placement.Row, placement.Column) is null;
     }
 
     /// <summary>
